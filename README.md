@@ -12,8 +12,8 @@ usage: main.py [-h] [--proxy PROXY] [--user-agent USER_AGENT] [-o FILENAME] user
 TwitCasting live stream recorder.
 
 positional arguments:
-  user_id               The user id to record. i.e. the string after
-                        "https://twitcasting.tv/" in URL
+  user_id               The user id to record.
+                        i.e. the string after "https://twitcasting.tv/" in URL
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -22,6 +22,14 @@ optional arguments:
                         Request with custom User Agent.
   -o FILENAME, --output FILENAME
                         File name to save recorded video.
+```
+
+Recorded videos are saved as MPEG-2 TS format, which is designed for live streaming.
+
+You can simply remux them to MP4 format using ffmpeg:
+
+```
+ffmpeg -i xxx.ts -codec copy xxx.mp4
 ```
 
 ## Thanks
