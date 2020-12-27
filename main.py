@@ -96,7 +96,16 @@ def get_stream_url(user, proxy='', user_agent=''):
         print(f'No stream available for user {user}')
         return
 
-    stream_url = f'{proto}://{host}/ws.app/stream/{movie_id}/fmp4/bd/1/1500?mode={mode}'
+    try: 
+        if 'main' == mode: 
+            stream_url = data['llfmp4']['streams']['main']
+        elif 'base' == mode: 
+            stream_url = data['llfmp4']['streams']['base']
+    except: 
+         # fallback 
+         # 1st number variable: 0 - no compression, 1 - compression
+         # 2nd number variable: bufferOffset  
+        stream_url = f'{proto}://{host}/ws.app/stream/{movie_id}/fmp4/bd/0/0?mode={mode}'
     return stream_url
 
 
