@@ -13,7 +13,7 @@ def record_twitcasting(user, proxy='', user_agent='', filename=''):
 
         try:
             # Default filename
-            filename = filename if filename else datetime.now().strftime('record_%Y%m%d_%H%M%S.ts')
+            filename = filename if filename else datetime.now().strftime('record_' + user + '_%Y%m%d_%H%M%S.ts')
 
             output_fd = open(filename, 'wb')
             print(f'Writing stream to {filename}')
@@ -97,15 +97,12 @@ def get_stream_url(user, proxy='', user_agent=''):
         return
 
     try: 
-        if 'main' == mode: 
-            stream_url = data['llfmp4']['streams']['main']
-        elif 'base' == mode: 
-            stream_url = data['llfmp4']['streams']['base']
+        stream_url = data['llfmp4']['streams']['main']
     except: 
          # fallback 
          # 1st number variable: 0 - no compression, 1 - compression
          # 2nd number variable: bufferOffset  
-        stream_url = f'{proto}://{host}/ws.app/stream/{movie_id}/fmp4/bd/0/0?mode={mode}'
+        stream_url = f'{proto}://{host}/ws.app/stream/{movie_id}/fmp4/bd/1/1500?mode={mode}'
     return stream_url
 
 
